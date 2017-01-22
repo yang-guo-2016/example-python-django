@@ -1,0 +1,32 @@
+flows:
+  - name: default
+    language: python
+	  version: 2.7.11
+
+    trigger:
+      push:
+        - develop
+        - master
+      pull_request: true
+
+    steps:
+      - name: init
+        plugin:
+          name: python_init
+
+      - name: MySQL
+        plugin:
+          name: mysql_database
+
+      - name: Git Clone
+        plugin:
+          name: git
+          
+      - name: Install
+        plugin:
+          name: python_install
+          
+      - name: Test
+        failure: true
+        plugin:
+          name: python_test
